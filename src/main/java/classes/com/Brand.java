@@ -54,6 +54,11 @@ public class Brand {
         this.price = price;
     }
 
+    /**
+     * Associating fields to a string for writing a brand to file
+     *
+     * @return String This returns a car's formatted string to be available in csv file
+     */
     @Override
     public String toString() {
         return String.format("%s, %s, %s, %.3f", brandID, brandName, soundBrand, price);

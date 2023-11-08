@@ -15,6 +15,12 @@ public class BrandList extends ArrayList<Brand> {
 
     }
 
+    /**
+     * Read data from a csv file
+     *
+     * @param fileName This is the file's path name
+     * @return boolean This returns true if reading to file is success and vice versa
+     */
     public boolean loadFromFile(String fileName) {
         try {
             File f = new File(fileName);
@@ -31,11 +37,15 @@ public class BrandList extends ArrayList<Brand> {
         } catch (
                 FileNotFoundException e) {
             return false;
-        } catch (Exception e) {
-            return false;
         }
     }
 
+    /**
+     * Open the file based on the filename to write data in line-by-line in text format
+     *
+     * @param fileName This is the file's path name
+     * @return boolean This returns true if writing to file is successful and vice versa
+     */
     public boolean saveToFile(String fileName) {
         try {
             new FileWriter(fileName).close();
@@ -50,11 +60,15 @@ public class BrandList extends ArrayList<Brand> {
             return true;
         } catch (IOException e) {
             return false;
-        } catch (Exception e) {
-            return false;
         }
     }
 
+    /**
+     * Find the position of a Brand Object in a BrandList by using brandID
+     *
+     * @param ID This is brandID
+     * @return int This returns index of the Brand Object
+     */
     public int searchID(String ID) {
         for (int i = 0; i < size(); i++) {
             if (get(i).getBrandID().equals(ID.toUpperCase()))
@@ -63,6 +77,13 @@ public class BrandList extends ArrayList<Brand> {
         return -1;
     }
 
+    /**
+     * List all the available Brands for helping user to choose Brand when add or update a Car
+     * Object in
+     * a CarList
+     *
+     * @return Brand This returns a Brand in a BrandList
+     */
     public Brand getUserChoice() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size(); i++) {
@@ -81,6 +102,9 @@ public class BrandList extends ArrayList<Brand> {
         }
     }
 
+    /**
+     * Add a new Brand Object to a BrandList
+     */
     public void addBrand() {
         String id = Inputter.inputString("Brand's ID:").toUpperCase();
         String name = Inputter.inputString("Brand's name:");
@@ -89,6 +113,9 @@ public class BrandList extends ArrayList<Brand> {
         add(new Brand(id, name, sound, price));
     }
 
+    /**
+     * Update a Brand in a BrandList
+     */
     public void updateBrand() {
         String id = Inputter
                 .inputString("Enter brand's ID need to be updated:")
@@ -105,6 +132,9 @@ public class BrandList extends ArrayList<Brand> {
         }
     }
 
+    /**
+     * List all brands in a BrandList
+     */
     public void listBrands() {
         for (Brand b : this) {
             System.out.println(b);

@@ -10,14 +10,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CarList extends ArrayList<Car> {
-    private BrandList brandList;
+    private final BrandList brandList;
 
     public CarList(BrandList brandList) {
         this.brandList = brandList;
     }
 
-    ;
-
+    /**
+     * Read data from a csv file
+     *
+     * @param fileName This is the file's path name
+     * @return boolean This returns true if reading to file is success and vice versa
+     */
     public boolean loadFromFile(String fileName) {
         try {
             File f = new File(fileName);
@@ -27,7 +31,7 @@ public class CarList extends ArrayList<Car> {
             while (scanner.hasNextLine()) {
                 String[] data = scanner.nextLine().split(", ");
 
-                // use carBrand to find index of brand of brandList
+                // Use carBrand to find index of brand of brandList
                 Brand carBrand = new Brand();
                 carBrand.setBrandID(data[1]);
 
@@ -42,11 +46,15 @@ public class CarList extends ArrayList<Car> {
         } catch (
                 FileNotFoundException e) {
             return false;
-        } catch (Exception e) {
-            return false;
         }
     }
 
+    /**
+     * Open the file based on the filename to write data in line-by-line in text format
+     *
+     * @param fileName This is the file's path name
+     * @return boolean This returns true if writing to file is successful and vice versa
+     */
     public boolean saveToFile(String fileName) {
         try {
             new FileWriter(fileName).close();
@@ -61,29 +69,48 @@ public class CarList extends ArrayList<Car> {
             return true;
         } catch (IOException e) {
             return false;
-        } catch (Exception e) {
-            return false;
         }
     }
 
+    /**
+     * Find the position of a Car Object in a CarList by using carID
+     *
+     * @param ID This is carID
+     * @return int This returns index of the Car Object
+     */
     public int searchID(String ID) {
         Car c = new Car();
         c.setCarID(ID);
         return indexOf(c);
     }
 
+    /**
+     * Find the position of a Car Object in a CarList by using frameID
+     *
+     * @param fID This is frameID
+     * @return int This returns index of the Car Object
+     */
     public int searchFrame(String fID) {
         Car c = new Car();
         c.setFrameID(fID);
         return indexOf(c);
     }
 
+    /**
+     * Find the position of a Car Object in a CarList by using engineID
+     *
+     * @param eID This is engineID
+     * @return int This returns index of the Car Object
+     */
     public int searchEngine(String eID) {
         Car c = new Car();
         c.setEngineID(eID);
         return indexOf(c);
     }
 
+    /**
+     * Prompt user to enter information of a Car Object to add to a CarList
+     */
     public void addCar() {
         String cID = Inputter.inputString("Car's ID:", "[Cc]\\d{2}").toUpperCase();
         String color = Inputter.inputString("Car's color:");
@@ -100,10 +127,14 @@ public class CarList extends ArrayList<Car> {
             add(c);
     }
 
+    /**
+     * List cars in the console based on their brand names.
+     */
     public void printBasedBrandName() {
         String brandName = Inputter.inputString("Enter brand's name:").toUpperCase();
         int count = 0;
 
+        // You can use stream, but I think for loop in this situation is better
         for (Car c : this) {
             if (c.getBrand().getBrandName().toUpperCase().contains(brandName)) {
                 System.out.println(c.screenString());
@@ -115,6 +146,9 @@ public class CarList extends ArrayList<Car> {
             System.out.println("No car is detected!");
     }
 
+    /**
+     * @return boolean This returns true if the removal of a car is successful and vice versa
+     */
     public boolean removeCar() {
         String ID = Inputter.inputString("Enter car's ID:").toUpperCase();
 
@@ -123,13 +157,15 @@ public class CarList extends ArrayList<Car> {
             System.out.println("No car is detected!");
             return false;
         }
-        ;
 
         remove(i);
         System.out.println("Car with ID " + ID + " was removed!");
         return true;
     }
 
+    /**
+     * @return boolean This returns true if the updating of a car is successful, and vice versa
+     */
     public boolean updateCar() {
         String ID = Inputter.inputString("Enter car's ID:").toUpperCase();
 
@@ -154,6 +190,9 @@ public class CarList extends ArrayList<Car> {
         return true;
     }
 
+    /**
+     * List all Car Objects in a CarList
+     */
     public void listCars() {
         forEach(c -> System.out.println(c.screenString()));
     }

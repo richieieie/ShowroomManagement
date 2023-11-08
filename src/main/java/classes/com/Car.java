@@ -65,6 +65,12 @@ public class Car implements Comparable<Car> {
         this.engineID = engineID;
     }
 
+    /**
+     * Compare brandName of two brands
+     *
+     * @param o the object to be compared.
+     * @return int This returns the result of the comparison
+     */
     @Override
     public int compareTo(Car o) {
         int d = brand.getBrandName().compareTo(o.brand.getBrandName());
@@ -75,17 +81,33 @@ public class Car implements Comparable<Car> {
         return d;
     }
 
+    /**
+     * Associating fields to a string for writing a car to file
+     *
+     * @return String This returns a car's formatted string to be available in csv file
+     */
     @Override
     public String toString() {
         return String.format("%s, %s, %s, %s, %s", carID, brand.getBrandID(), color, frameID,
                 engineID);
     }
 
+    /**
+     * Associating fields to a string for outputting a car to screen
+     *
+     * @return String This returns a car's formatted string to be shown in console
+     */
     public String screenString() {
         return String.format("%s\n%s, %s, %s, %s", brand, carID, color, frameID,
                 engineID);
     }
 
+    /**
+     * Override equals method for checking duplicated of a Car in CarList
+     *
+     * @return boolean This returns true if carIDs or frameIDs or engineIDs of both are equal and
+     * vice versa
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

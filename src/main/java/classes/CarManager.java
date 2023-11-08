@@ -3,12 +3,10 @@ package main.java.classes;
 import main.java.classes.com.*;
 import main.java.utils.Inputter;
 
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.Collections;
 
 public class CarManager {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         BrandList brandList = new BrandList();
         CarList carsList = new CarList(brandList);
 
@@ -58,7 +56,7 @@ public class CarManager {
                     break;
                 case 6:
                     CarList newCarList = (CarList) carsList.clone();
-                    newCarList.sort(Comparator.comparing(c -> c.getBrand().getBrandName()));
+                    Collections.sort(newCarList);
                     newCarList.listCars();
                     break;
                 case 7:
