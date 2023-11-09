@@ -176,14 +176,14 @@ public class CarList extends ArrayList<Car> {
             return false;
         }
         Brand b = brandList.getUserChoice();
-        String color = Inputter.inputString("new car's color:");
+        String color = Inputter.inputString("New car's color:");
         String fID, eID;
         do {
             fID = Inputter.inputString("New car's frame ID:", "[Ff]\\d{5}").toUpperCase();
             eID = Inputter.inputString("New car's engine ID:", "[Ee]\\d{5}").toUpperCase();
-            if (searchFrame(fID) > 0 || searchEngine(eID) > 0)
+            if (searchFrame(fID) >= 0 || searchEngine(eID) >= 0)
                 System.out.println("FrameID or EngineID is duplicated");
-        } while (searchFrame(fID) > 0 || searchEngine(eID) > 0);
+        } while (searchFrame(fID) >= 0 || searchEngine(eID) >= 0);
 
         set(i, new Car(ID, b, color, fID, eID));
 
